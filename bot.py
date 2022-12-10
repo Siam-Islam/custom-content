@@ -1,6 +1,7 @@
-from pyrogram import Client, idle
 import os
 import logging
+from .stream import routes
+from pyrogram import Client, idle
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -9,6 +10,11 @@ logging.getLogger("aiohttp").setLevel(logging.ERROR)
 logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 
 server = web.AppRunner(web_server())
+
+def web_server():
+    web_app = web.Application(client_max_size=30000000)
+    web_app.add_routes(routes)
+    return web_app
 
 async def start_services():
     await web.TCPSite(server, 8000).start()
