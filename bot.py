@@ -1,6 +1,6 @@
 import os
 import logging
-from plugins.stream import routes
+from plugins import routes
 from pyrogram import Client, idle
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
