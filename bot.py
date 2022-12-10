@@ -11,7 +11,7 @@ logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
 server = web.AppRunner(web_server())
 
 async def start_services():
-    await web.TCPSite(server, 8080).start()
+    await web.TCPSite(server, 8000).start()
 
 BOT_TOKEN = os.environ.get("TOKEN", "1763065907:AAEtGmMbHR8lZTY5xn0XYtm9JWAp_Zga0OY")
 API_ID = int(os.environ.get("API_ID",2766365))
