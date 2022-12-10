@@ -1,25 +1,21 @@
-import os
-import logging
-from config import Config
 from pyrogram import Client
+import os
 
-logging.basicConfig(level=logging.DEBUG,
-                    format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-logger = logging.getLogger(__name__)
+TOKEN = os.environ.get("TOKEN", "")
 
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+API_ID = int(os.environ.get("API_ID",12345))
 
-if __name__ == "__main__":
+API_HASH = os.environ.get("API_HASH", "")
 
-    StreamBot = Client(
-                name="custom-content",
-                api_id=Config.API_ID,
-                api_hash=Config.API_HASH,
-                plugins={"root": "plugins"},
-                bot_token=Config.BOT_TOKEN,)
-
-    logger.info("Bot Started")
-    StreamBot.run()
-    idle()
-    logger.info("Bot Stopped")
-
+if __name__ == "__main__" :
+    plugins = dict(
+        root="plugins"
+    )
+    app = Client(
+        "MYBot",
+        bot_token=TOKEN,
+        api_hash=API_HASH,
+        api_id=API_ID,
+        plugins=plugins
+    )
+    app.run()
