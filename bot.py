@@ -1,11 +1,11 @@
 from pyrogram import Client
 import os
 
-TOKEN = os.environ.get("TOKEN", "")
+BOT_TOKEN = os.environ.get("TOKEN", "1763065907:AAEtGmMbHR8lZTY5xn0XYtm9JWAp_Zga0OY")
 
-API_ID = int(os.environ.get("API_ID",12345))
+API_ID = int(os.environ.get("API_ID",2766365))
 
-API_HASH = os.environ.get("API_HASH", "")
+API_HASH = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 
 if __name__ == "__main__" :
     plugins = dict(
@@ -13,7 +13,7 @@ if __name__ == "__main__" :
     )
     app = Client(
         "MYBot",
-        bot_token=TOKEN,
+        bot_token=BOT_TOKEN,
         api_hash=API_HASH,
         api_id=API_ID,
         plugins=plugins
