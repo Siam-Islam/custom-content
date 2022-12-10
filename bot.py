@@ -4,7 +4,14 @@ import logging
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
-logging.getLogger("pyrogram").setLevel(logging.WARNING)
+logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("aiohttp").setLevel(logging.ERROR)
+logging.getLogger("aiohttp.web").setLevel(logging.ERROR)
+
+server = web.AppRunner(web_server())
+
+async def start_services():
+    await web.TCPSite(server, 8080).start()
 
 BOT_TOKEN = os.environ.get("TOKEN", "1763065907:AAEtGmMbHR8lZTY5xn0XYtm9JWAp_Zga0OY")
 API_ID = int(os.environ.get("API_ID",2766365))
