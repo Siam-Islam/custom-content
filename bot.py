@@ -23,7 +23,7 @@ async def start_services():
     await app.start()
     await server.setup()
     await web.TCPSite(server, PORT).start()
-    print("Bot Started")
+    print("Bot Started.")
     await idle()
 
 async def cleanup():
@@ -40,4 +40,4 @@ if __name__ == "__main__":
     finally:
         loop.run_until_complete(cleanup())
         loop.stop()
-        print("Bot Stopped")
+        print("Bot Stopped.")
