@@ -1,4 +1,4 @@
-from .bot import app
+from bot import app
 from pyrogram.types import filters
 
 @app.on_message(filters.private & filters.command(['start']))
