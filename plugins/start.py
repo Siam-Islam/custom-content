@@ -1,5 +1,5 @@
-from pyrogram.types import filters, Client as app
+from pyrogram.types import filters, Client, Message
 
 @app.on_message(filters.private & filters.command(['start']))
-async def start(client, message):
-    await message.reply('Hi I am working.') 
+async def start(_m: Message):
+    await m.reply('Hi I am working.') 
