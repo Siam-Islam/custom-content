@@ -1,8 +1,6 @@
-from pyrogram import Client, filters
-from pyrogram.types import Message
+from .bot import app
+from pyrogram.types import filters
 
-@Client.on_message(filters.private & filters.command(['start']))
-async def start(_, m: Message):
-    await m.reply(
-        f'Hi {m.from_user.mention(style="md")}, Send me a file to get an instant stream link.'
-    ) 
+@app.on_message(filters.private & filters.command(['start']))
+async def start(client, message):
+    await message.reply('Hi I am working.') 
