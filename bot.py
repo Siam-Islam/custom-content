@@ -20,8 +20,6 @@ server = web.AppRunner(web_server())
 if __name__ == "__main__" :
     app = Client("MYBot", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID, plugins={"root": "plugins"})
     app.start()
-    server.setup()
-    web.TCPSite(server, "0.0.0.0", PORT).start()
     print("Bot Started")
     idle()
     print("Bot Stopped")
