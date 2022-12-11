@@ -15,12 +15,13 @@ BOT_TOKEN = os.environ.get("TOKEN", "1763065907:AAFk-ITNJWExRGAzCSGzKkchUTLqP7lH
 API_ID = os.environ.get("API_ID", "2766365")
 API_HASH = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 PORT= os.environ.get("PORT", "8000")
-app = Client("MYBot", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID, plugins={"root": "plugins"})
 server = web.AppRunner(web_server())
 
+if __name__ == "__main__" :
+    app = Client("MYBot", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID, plugins={"root": "plugins"})
     app.start()
     server.setup()
     web.TCPSite(server, "0.0.0.0", PORT).start()
-    logger.info("Bot Started")
+    print("Bot Started")
     idle()
-    logger.info("Bot Stopped")
+    print("Bot Stopped")
