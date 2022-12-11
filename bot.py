@@ -16,28 +16,11 @@ API_ID = os.environ.get("API_ID", "2766365")
 API_HASH = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 PORT= os.environ.get("PORT", "8000")
 app = Client("MYBot", bot_token=BOT_TOKEN, api_hash=API_HASH, api_id=API_ID, plugins={"root": "plugins"})
-loop = asyncio.get_event_loop()
 server = web.AppRunner(web_server())
 
-async def start_services():
-    await app.start()
-    await server.setup()
-    await web.TCPSite(server, "0.0.0.0", PORT).start()
-    print("Bot Started.")
-    await idle()
-
-async def cleanup():
-    await server.cleanup()
-    await app.stop()
-
-if __name__ == "__main__":
-    try:
-        loop.run_until_complete(start_services())
-    except KeyboardInterrupt:
-        pass
-    except Exception as err:
-        logging.error(err.with_traceback(None))
-    finally:
-        loop.run_until_complete(cleanup())
-        loop.stop()
-        print("Bot Stopped.")
+    app.start()
+    server.setup()
+    web.TCPSite(server, "0.0.0.0", PORT).start()
+    logger.info("Bot Started")
+    idle()
+    logger.info("Bot Stopped")
