@@ -36,7 +36,7 @@ async def start_services():
 
 async def cleanup():
     await server.cleanup()
-    await StreamBot.stop()
+    await app.stop()
 
 if __name__ == "__main__":
     try:
