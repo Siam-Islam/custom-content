@@ -1,5 +1,6 @@
-from pyrogram import filters, Client
+from bot import app
+from pyrogram import filters
 
-@Client.on_message(filters.command(["start", "help"]))
+@app.on_message(filters.command(["start", "help"]))
 async def start(client, message):
     await message.reply('Hi, Send me a file to get an instant stream link.')
