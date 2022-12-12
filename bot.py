@@ -16,6 +16,16 @@ app = Client("MYBot", bot_token=token, api_hash=api_hash, api_id=api_id, plugins
 port = os.environ.get("PORT", "8000")
 server = web.AppRunner(web_server())
 loop = asyncio.get_event_loop()
+routes = web.RouteTableDef()
+
+def web_server():
+    web_app = web.Application(client_max_size=30000000)
+    web_app.add_routes(routes)
+    return web_app
+
+@routes.get("/", allow_head=True)
+async def root_route_handler(_):
+    return web.json_response({"server_status": "running",})
 
 async def start_services():
     await app.start()
