@@ -33,7 +33,8 @@ async def start_services():
     await idle()
 
 async def cleanup():
-    await web.AppRunner(web_server()).cleanup(), app.stop()
+    await web.AppRunner(web_server()).cleanup()
+    await app.stop()
 
 if __name__ == "__main__":
     try:
