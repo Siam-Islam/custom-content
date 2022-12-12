@@ -27,7 +27,7 @@ def web_server():
 
 async def start_services():
     await app.start()
-    await server.setup()
+    await web.AppRunner(web_server()).setup()
     await web.TCPSite(web.AppRunner(web_server()), "0.0.0.0", port).start()
     print("----- Bot Started -----")
     await idle()
