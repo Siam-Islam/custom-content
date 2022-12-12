@@ -13,7 +13,6 @@ api_id = os.environ.get("API_ID", "2766365")
 api_hash = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 app = Client("MYBot", bot_token=token, api_hash=api_hash, api_id=api_id, plugins={"root": "plugins"})
 port = os.environ.get("PORT", "8000")
-server = web.AppRunner(web_server())
 loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
 
@@ -21,6 +20,8 @@ def web_server():
     web_app = web.Application(client_max_size=30000000)
     web_app.add_routes(routes)
     return web_app
+
+server = web.AppRunner(web_server())
 
 @routes.get("/", allow_head=True)
 async def root_route_handler(_):
