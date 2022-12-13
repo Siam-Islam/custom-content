@@ -9,7 +9,7 @@ async def start(client, message):
 
 @app.on_message(filters.private &( filters.document | filters.audio | filters.video ))
 async def send_doc(client, message):
-    media = await client.get_messages(message.chat.id, message.message_id)
+    media = await client.get_messages(message.chat.id, message.id)
     file = media.document or media.video or media.audio
     filename = file.file_name
     filesize = humanize.naturalsize(file.file_size)
