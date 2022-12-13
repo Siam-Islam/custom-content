@@ -1,5 +1,5 @@
 humanize==4.4.0
-pyrogram==2.0.69
+pyrogram==2.0.70
 tgcrypto==1.2.5
 aiohttp==3.8.3
 
