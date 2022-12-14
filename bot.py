@@ -29,7 +29,7 @@ server = web.AppRunner(web_server())
 
 async def start_services():
     print("----- CHECKING THE BOT -----")
-    await app.run()
+    await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
     print("----- BOT STARTED SUCESSFULLY -----")
