@@ -1,4 +1,4 @@
-import os, asyncio, logging, random
+import os, asyncio, logging, random, requests, re
 from pyrogram import Client as app, filters
 
 log = logging.getLogger(__name__)
