@@ -4,7 +4,7 @@ class Utilities:
     def is_url(text):
         return text.startswith("http")
 
-@app.on_message(filters.private & ((filters.text & ~filters.edited) | filters.media) & filters.incoming)
+@app.on_message(filters.private & filters.text)
 async def _(client, message):
     if not Utilities.is_url(message.text):
         return
