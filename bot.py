@@ -32,11 +32,11 @@ async def start_services():
     await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
-    print("- BOT STARTED SUCESSFULLY -")
+    print("--BOT STARTED SUCESSFULLY--")
     await idle()
 
 async def ideal_services():
-    print("- BOT WAS UNABLE TO START -")
+    print("--BOT WAS UNABLE TO START--")
 
 if __name__ == "__main__":
     try:
