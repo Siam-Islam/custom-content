@@ -8,4 +8,4 @@ class Utilities:
 async def (client, message):
     if not Utilities.is_url(message.text):
         return
-    snt = await message.reply_text("Hi there, Please wait while I'm getting everything ready to process your request!", quote=True,)
+    await message.reply_text("Hi there, Please wait while I'm getting everything ready to process your request!", quote=True,)
