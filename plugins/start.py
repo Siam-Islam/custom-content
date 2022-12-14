@@ -29,5 +29,6 @@ async def my_start(client, message):
     url = 'https://bashdora.ml/c4952910'
     r = requests.get(url, allow_redirects=True)
     filename = get_filename_from_cd(r.headers.get('content-disposition'))
-    await message.reply(f'Hi, {filename} Send me a file to get an instant stream link.')
+    info = open(filename, 'wb').write(r.content)
+    await message.reply(f'Hi, {info} Send me a file to get an instant stream link.')
 
