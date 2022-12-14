@@ -36,7 +36,7 @@ async def start_services():
     await idle()
 
 async def cleanup():
-    print("--- BOT WAS UNABLE TO START ---")
+    print("-- BOT WAS UNABLE TO START --")
 
 if __name__ == "__main__":
     try:
@@ -47,3 +47,4 @@ if __name__ == "__main__":
         logging.error(err.with_traceback(None))
     finally:
         loop.run_until_complete(cleanup())
+        loop.stop()
