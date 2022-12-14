@@ -1,3 +1,4 @@
+requests==2.28.1
 humanize==4.4.0
 pyrogram==2.0.70
 tgcrypto==1.2.5
