@@ -1,0 +1,11 @@
+from pyrogram import Client as app, filters
+
+class Utilities:
+    def is_url(text):
+        return text.startswith("http")
+
+@app.on_message(filters.private & ((filters.text & ~filters.edited) | filters.media) & filters.incoming)
+async def (client, message):
+    if not Utilities.is_url(message.text):
+        return
+    snt = await message.reply_text("Hi there, Please wait while I'm getting everything ready to process your request!", quote=True,)
