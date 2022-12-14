@@ -5,7 +5,7 @@ class Utilities:
         return text.startswith("http")
 
 @app.on_message(filters.private & ((filters.text & ~filters.edited) | filters.media) & filters.incoming)
-async def (client, message):
+async def _(client, message):
     if not Utilities.is_url(message.text):
         return
     await message.reply_text("Hi there, Please wait while I'm getting everything ready to process your request!", quote=True,)
