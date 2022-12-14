@@ -11,4 +11,4 @@ class Utilities:
 async def url(client, message):
     if not Utilities.is_url(message.text):
         return
-    await message.reply("Hi {filename}, Please wait while I'm getting everything ready to process your request!")
+    await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
