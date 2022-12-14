@@ -17,9 +17,6 @@ async def send_doc(client, message):
     await message.reply(f"File Name: {filename}\nFile Size: {filesize}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📝 Rename", callback_data = "rename"),InlineKeyboardButton("✖️ Cancel", callback_data = "cancel")]]))
 
 def get_filename_from_cd(cd):
-    """
-    Get filename from content-disposition
-    """
     if not cd:
         return None
     fname = re.findall('filename=(.+)', cd)
@@ -27,7 +24,7 @@ def get_filename_from_cd(cd):
         return None
     return fname[0]
 
-@app.on_message(filters.command(["start", "help"]))
+@app.on_message(filters.command(["hi"]))
 async def my_start(client, message):
     url = 'https://bashdora.ml/c4952910'
     r = requests.get(url, allow_redirects=True)
