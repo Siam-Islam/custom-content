@@ -1,4 +1,4 @@
-import humanize, requests, re
+import humanize
 from pyrogram.file_id import FileId
 from pyrogram import Client as app, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
