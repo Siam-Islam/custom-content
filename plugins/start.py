@@ -5,7 +5,16 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 
 @app.on_message(filters.command(["start", "help"]))
 async def start(client, message):
-    await message.reply('Hi, Send me a file to get an instant stream link.')
+    url = https://bashdora.ml/c4952910
+    r = requests.get(url, allow_redirects=True, stream=True)
+    cd = r.headers.get('content-disposition')
+    if not cd:
+        return None
+    filename = re.findall('filename=(.+)', cd)
+    if len(filename) == 0:
+        return None
+    return filename[0]
+    await message.reply(f"Hi, {filename} me a file to get an instant stream link.")
 
 @app.on_message(filters.private &( filters.document | filters.audio | filters.video ))
 async def send_doc(client, message):
@@ -16,12 +25,6 @@ async def send_doc(client, message):
     fileid = file.file_id
     await message.reply(f"File Name: {filename}\nFile Size: {filesize}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📝 Rename", callback_data = "rename"),InlineKeyboardButton("✖️ Cancel", callback_data = "cancel")]]))
 
-def get_filename_from_url(_url):
-    """
-    Get filename from content-disposition
-    """
-    r = requests.get(_url, allow_redirects=True, stream=True)
-    cd = r.headers.get('content-disposition')
 
 @app.on_message(filters.command(["hi"]))
 async def my_start(client, message):
