@@ -16,19 +16,19 @@ async def send_doc(client, message):
     fileid = file.file_id
     await message.reply(f"File Name: {filename}\nFile Size: {filesize}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("📝 Rename", callback_data = "rename"),InlineKeyboardButton("✖️ Cancel", callback_data = "cancel")]]))
 
-def get_filename_from_cd(cd):
-    if not cd:
-        return None
-    fname = re.findall('filename=(.+)', cd)
-    if len(fname) == 0:
-        return None
-    return fname[0]
+def get_filename_from_url(_url):
+    """
+    Get filename from content-disposition
+    """
+    r = requests.get(_url, allow_redirects=True, stream=True)
+    cd = r.headers.get('content-disposition')
 
 @app.on_message(filters.command(["hi"]))
 async def my_start(client, message):
-    url = 'https://bashdora.ml/c4952910'
-    r = requests.get(url, allow_redirects=True, stream=True)
-    filename = get_filename_from_cd(r.headers.get('content-disposition'))
-    info = open(filename, 'wb').write(r.content)
     await message.reply(f'Hi, {info} Send me a file to get an instant stream link.')
-
+    if not cd:
+        return None
+    filename = re.findall('filename=(.+)', cd)
+    if len(filename) == 0:
+        return None
+    return filename[0]
