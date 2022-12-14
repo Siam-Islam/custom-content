@@ -28,15 +28,15 @@ def web_server():
 server = web.AppRunner(web_server())
 
 async def start_services():
-    await app.start()
+    PRINT("----- CHECKING THE BOT -----")
+    await app.run()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
-    print("----- Bot Started -----")
+    print("----- BOT STARTED SUCESSFULLY -----")
     await idle()
 
 async def cleanup():
-    await server.cleanup()
-    await app.stop()
+    print("--- BOT WAS UNABLE TO START ---")
 
 if __name__ == "__main__":
     try:
@@ -48,4 +48,3 @@ if __name__ == "__main__":
     finally:
         loop.run_until_complete(cleanup())
         loop.stop()
-        print("----- Bot Stopped -----")
