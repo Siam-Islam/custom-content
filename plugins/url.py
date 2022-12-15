@@ -1,4 +1,4 @@
-import requests, re
+import requests, re, humanize
 from pyrogram import Client as app, filters
 
 class Utilities:
@@ -29,7 +29,8 @@ async def url(client, message):
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
     name = await Utilities.get_filename(file_link)
-    size = await Utilities.get_filesize(file_link)
+    bytes = await Utilities.get_filesize(file_link)
+    size = humanize.naturalsize(bytes)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
