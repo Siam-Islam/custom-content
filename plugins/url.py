@@ -5,7 +5,7 @@ class utilities:
     def is_url(text):
         return text.startswith("http")
 
-    def get_filename(file_link):
+    async def get_filename(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get('content-disposition')
        filename = re.findall('filename=(.+)', cd)[0]
@@ -13,7 +13,7 @@ class utilities:
            return filename
        return None
 
-    def get_filesize(file_link):
+    async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
        if filesize:
@@ -26,8 +26,8 @@ async def url(client, message):
         return
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
-    name = utilities.get_filename(file_link)
-    bytes = utilities.get_filesize(file_link)
+    name = await utilities.get_filename(file_link)
+    bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
