@@ -1,9 +1,6 @@
-import requests, re
+import requests, re, humanize
 from pyrogram import Client as app, filters
 
-SIZE_UNITS = ['B', 'KB', 'MB', 'GB', 'TB', 'PB']
-
-class Utilities:
     def is_url(text):
         return text.startswith("http")
 
@@ -14,7 +11,7 @@ class Utilities:
            return None
        filename = re.findall('filename=(.+)', cd)
        if filename:
-           return filename
+           return filename[0]
        return None
 
     async def get_filesize(file_link):
@@ -24,27 +21,15 @@ class Utilities:
            return filesize
        return "Unable to get file size."
 
-    def get_readable_file_size(size_in_bytes):
-    if size_in_bytes is None:
-        return '0B'
-    index = 0
-    while size_in_bytes >= 1024:
-        size_in_bytes /= 1024
-        index += 1
-    try:
-        return f'{round(size_in_bytes, 2)}{SIZE_UNITS[index]}'
-    except IndexError:
-        return 'File too large'
-
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
     if not Utilities.is_url(message.text):
         return
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
-    name = await Utilities.get_filename(file_link)
-    bytes = await Utilities.get_filesize(file_link)
-    size = await Utilities.get_readable_file_size(bytes)
+    name = get_filename(file_link)
+    bytes = get_filesize(file_link)
+    size = humanize.naturalsize(bytes, binary=True)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
