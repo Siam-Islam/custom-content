@@ -8,9 +8,9 @@ class utilities:
     async def get_filename(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get('content-disposition')
-       filename = re.findall()
+       filename = re.findall('filename=(.+)', cd[0])
        if filename:
-           return filename[0]
+           return filename
        return None
 
     async def get_filesize(file_link):
