@@ -28,8 +28,8 @@ async def url(client, message):
         return
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
-    name = utilities.get_filename(file_link)
-    bytes = utilities.get_filesize(file_link)
+    name = await utilities.get_filename(file_link)
+    bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
