@@ -25,6 +25,6 @@ async def url(client, message):
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
-    await snt.edit_text(text=f"{name}")
+    await snt.edit_text(f"{name}")
         
 
