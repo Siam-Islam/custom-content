@@ -24,7 +24,7 @@ class Utilities:
            return filesize
        return "Unable to get file size."
 
-    def get_readable_file_size(size_in_bytes) -> str:
+    def get_readable_file_size(size_in_bytes):
     if size_in_bytes is None:
         return '0B'
     index = 0
@@ -44,7 +44,7 @@ async def url(client, message):
     file_link = message.text
     name = await Utilities.get_filename(file_link)
     bytes = await Utilities.get_filesize(file_link)
-    size = get_readable_file_size(bytes)
+    size = await Utilities.get_readable_file_size(bytes)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
