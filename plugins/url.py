@@ -1,7 +1,7 @@
 import requests, re, humanize
 from pyrogram import Client as app, filters
 
-    def is_url(text):
+    async def is_url(text):
         return text.startswith("http")
 
     async def get_filename(file_link):
