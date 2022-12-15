@@ -1,6 +1,7 @@
 import requests, re, humanize
 from pyrogram import Client as app, filters
 
+class utilities:
     async def is_url(text):
         return text.startswith("http")
 
@@ -23,12 +24,12 @@ from pyrogram import Client as app, filters
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
-    if not Utilities.is_url(message.text):
+    if not utilities.is_url(message.text):
         return
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
-    name = get_filename(file_link)
-    bytes = get_filesize(file_link)
+    name = utilities.get_filename(file_link)
+    bytes = utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
