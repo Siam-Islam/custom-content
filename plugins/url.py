@@ -1,7 +1,6 @@
 import requests, re
 from pyrogram import Client as app, filters
 
-
 class Utilities:
     def is_url(text):
         return text.startswith("http")
