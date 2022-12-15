@@ -27,18 +27,15 @@ def web_server():
 
 server = web.AppRunner(web_server())
 
-async def start_services():
+if __name__ == "__main__":
     print("----- CHECKING THE BOT -----")
+
+async def start_services():
     await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
     print("--BOT STARTED SUCESSFULLY--")
     await idle()
-
-async def ideal_services():
-    print("--BOT WAS UNABLE TO START--")
-
-if __name__ == "__main__":
     try:
         loop.run_until_complete(start_services())
     except KeyboardInterrupt:
@@ -46,5 +43,5 @@ if __name__ == "__main__":
     except Exception as err:
         logging.error(err.with_traceback(None))
     finally:
-        loop.run_until_complete(ideal_services())
         loop.stop()
+        print("--BOT WAS UNABLE TO START--")
