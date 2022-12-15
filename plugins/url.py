@@ -11,9 +11,9 @@ class Utilities:
        if not cd:
            return None
        filename = re.findall('filename=(.+)', cd)
-       if len(filename) == 0:
-           return None
-       return filename[0]
+       if filename:
+           return filename
+       return "No Filename Found!"
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
