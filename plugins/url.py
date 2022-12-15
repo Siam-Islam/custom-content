@@ -1,13 +1,12 @@
-import os, asyncio, logging, random, requests, re
+import requests, re
 from pyrogram import Client as app, filters
 
-log = logging.getLogger(__name__)
 
 class Utilities:
     def is_url(text):
         return text.startswith("http")
 
-    async def get_duration(file_link):
+    async def get_filename(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get('content-disposition')
        if not cd:
@@ -23,11 +22,10 @@ async def url(client, message):
         return
     snt = await message.reply("Hi Please wait while I'm getting everything ready to process your request!")
     file_link = message.text
-    duration = await Utilities.get_duration(file_link)
-    if isinstance(duration, str):
+    name = await Utilities.get_filename(file_link)
+    if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
-
-    await snt.edit_text(text=f"{duration}")
+    await snt.edit_text(text=f"{name}")
         
 
