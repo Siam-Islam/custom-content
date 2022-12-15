@@ -27,9 +27,6 @@ async def url(client, message):
     name = await utilities.get_filename(file_link)
     bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
-    if isinstance(name, str):
-        await snt.edit_text(f"😟 Sorry! {name} I cannot open the file.")
-        return
     await snt.edit_text(f"Title: {name}\nSize: {size}")
         
 
