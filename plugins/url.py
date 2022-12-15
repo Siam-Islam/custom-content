@@ -29,7 +29,7 @@ async def url(client, message):
     size = humanize.naturalsize(bytes, binary=True)
     if isinstance(name, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
-           return
+        return
     await snt.edit_text(f"Title: {name}\nSize: {size}")
         
 
