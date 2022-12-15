@@ -10,8 +10,8 @@ class utilities:
        cd = r.headers.get('content-disposition')
        filename = re.findall('filename=(.+)', cd)
        if filename:
-           return filename[0]
-       return "filename not found"
+           return filename
+       return None
 
     async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
