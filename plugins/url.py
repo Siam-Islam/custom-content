@@ -10,7 +10,7 @@ class utilities:
        cd = r.headers.get('content-disposition')
        if not cd:
            return None
-       filename = re.findall('filename=(.+)', cd)
+       fname = re.findall('filename=(.+)', cd)
        if len(fname) == 0:
            return None
        return fname[0]
