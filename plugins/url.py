@@ -11,14 +11,14 @@ class utilities:
        filename = re.findall('filename=(.+)', cd)
        if filename:
            return filename
-       return None
+       return
 
     async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
        if filesize:
            return filesize
-       return None
+       return
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
@@ -29,7 +29,7 @@ async def url(client, message):
     name = await utilities.get_filename(file_link)
     bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
-    if isinstance(name, str):
+    if isinstance(bytes, str):
         await snt.edit_text("😟 Sorry! I cannot open the file.")
         return
     await snt.edit_text(f"Title: {name}\nSize: {size}")
