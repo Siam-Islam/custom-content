@@ -7,10 +7,10 @@ class utilities:
 
     async def get_filename(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
-       cd = r.headers.get('content-disposition')
+       cd = r.headers.get("content-disposition")
        if not cd:
            return "None"
-       fname = re.findall('filename=(.+)', cd)
+       fname = re.findall("filename=(.+)", cd)
        return fname[0]
 
     async def get_filesize(file_link):
@@ -28,7 +28,7 @@ async def url(client, message):
     bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if name == "None":
-        await snt.edit_text("😟 Sorry! I cannot open the file.")
+        await snt.edit_text("Link is not accessable.")
     else:
         await snt.edit_text(f"Title: {name}\nSize: {size}")
         
