@@ -11,7 +11,7 @@ class utilities:
        if not cd:
            return "None"
        fname = re.findall('filename=(.+)', cd)
-       return fname
+       return fname[0]
 
     async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
