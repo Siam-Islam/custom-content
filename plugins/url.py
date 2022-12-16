@@ -9,14 +9,12 @@ class utilities:
        r = requests.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get('content-disposition')
        filename = re.findall('filename=(.+)', cd)
-       if filename:
-           return filename
+       return filename
 
     async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
-       if filesize:
-           return filesize
+       return filesize
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
