@@ -2,7 +2,7 @@ import os, asyncio, time
 from helper.progress import progress_for_pyrogram
 from pyrogram import Client as app, filters
 
-@app.on_callback_query(filters.regex('cancel'))
+@app.on_callback_query(filters.regex("cancel"))
 async def cancel(bot,update):
         await update.message.delete()
 
