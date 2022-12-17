@@ -1,4 +1,4 @@
-import requests, re, humanize
+import requests, re, asyncio, humanize
 from pyrogram import Client as app, filters
 
 class utilities:
@@ -11,7 +11,9 @@ class utilities:
        if not cd:
            return "None"
        fname = re.findall("filename=(.+)", cd)
-       return fname[0]
+       t = fname[0]
+       name = t.strip().rstrip()
+       return name
 
     async def get_filesize(file_link):
        r = requests.get(file_link, allow_redirects=True, stream=True)
@@ -28,7 +30,7 @@ async def url(client, message):
     bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if name == "None":
-        await snt.edit_text("Link is not accessable.")
+        await snt.edit_text("Unsupported link!")
     else:
         await snt.edit_text(f"Title: {name}\nSize: {size}")
         
