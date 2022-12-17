@@ -1,12 +1,9 @@
+import asyncio
 from pyrogram import Client as app, filters
-from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 
 @app.on_callback_query(filters.regex('cancel'))
 async def cancel(bot,update):
-	try:
-		await update.message.delete()
-	except:
-		return
+        await update.message.delete()
 
 @app.on_callback_query(filters.regex('rename'))
 async def rename(bot,update):
