@@ -16,7 +16,7 @@ async def doc(bot,update):
      ms = await update.message.edit("``` Trying To Download...```")
      c_time = time.time()
      try:
-     	path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
+     	path = await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=(" Trying To Download...",  ms, c_time))
      except Exception as e:
      	await ms.edit(e)
      	return
@@ -24,9 +24,9 @@ async def doc(bot,update):
      splitpath = path.split("/downloads/")
      dow_file_name = splitpath[1]
      await ms.edit("```Trying To Upload```")
-     		c_time = time.time()
+     		t = time.time()
      		try:
-     			await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+     			await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, t))
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
