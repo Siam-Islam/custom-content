@@ -32,7 +32,7 @@ async def url(client, message):
     bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     if not name == "None":
-        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Upload",callback_data = "upload"),InlineKeyboardButton("Cancel",callback_data = "cancel") ]]))
+        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Upload",callback_data = "doc"),InlineKeyboardButton("Cancel",callback_data = "cancel") ]]))
     else:
         await snt.edit_text("Unsupported link!")
   
