@@ -2,12 +2,14 @@ import requests, re, asyncio, humanize
 from pyrogram import Client as app, filters
 from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 
+s = requests.Session()
+r = s.get(file_link, allow_redirects=True, stream=True)
+
 class utilities:
     def is_url(text):
         return text.startswith("http")
 
     async def get_filename(file_link):
-       r = s.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
        if not cd:
            return "None"
