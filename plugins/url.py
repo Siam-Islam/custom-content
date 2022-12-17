@@ -12,7 +12,7 @@ class utilities:
            return "None"
        fname = re.findall("filename=(.+)", cd)
        t = fname[0]
-       name = t.strip().rstrip()
+       name = t[1:][:-1]
        return name
 
     async def get_filesize(file_link):
