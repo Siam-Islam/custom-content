@@ -6,7 +6,7 @@ class utilities:
         return text.startswith("http")
 
     async def get_filename(file_link):
-       r = requests.get(file_link, allow_redirects=True, stream=True)
+       r = s.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
        if not cd:
            return "None"
@@ -15,7 +15,7 @@ class utilities:
        return name
 
     async def get_filesize(file_link):
-       r = requests.get(file_link, allow_redirects=True, stream=True)
+       r = s.get(file_link, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
        return filesize
 
@@ -23,6 +23,7 @@ class utilities:
 async def url(client, message):
     if not utilities.is_url(message.text):
         return
+    s = requests.Session()
     snt = await message.reply("Processing link.......")
     file_link = message.text
     name = await utilities.get_filename(file_link)
