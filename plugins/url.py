@@ -18,7 +18,6 @@ class utilities:
        return name
 
     async def get_filesize(file_link):
-       r = s.get(file_link, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
        return filesize
 
