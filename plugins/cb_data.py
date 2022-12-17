@@ -19,7 +19,6 @@ async def doc(bot,update):
      except Exception as e:
      	await ms.edit(e)
      	return
-     splitpath = path.split("/downloads/")
      await ms.edit("Trying To Upload")
      try:
      	 await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
