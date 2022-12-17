@@ -24,7 +24,7 @@ async def doc(bot,update):
      dow_file_name = splitpath[1]
      await ms.edit("Trying To Upload")
      		try:
-     			await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, t))
+     			await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
      			await ms.delete()
      			os.remove(file_path)
      		except Exception as e:
