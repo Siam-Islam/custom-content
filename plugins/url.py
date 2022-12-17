@@ -1,5 +1,6 @@
 import requests, re, asyncio, humanize
 from pyrogram import Client as app, filters
+from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceReply
 
 class utilities:
     def is_url(text):
@@ -32,6 +33,6 @@ async def url(client, message):
     if name == "None":
         await snt.edit_text("Unsupported link!")
     else:
-        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}")
-        
+        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup=InlineKeyboardMarkup(
+	 [[ InlineKeyboardButton("Upload" , callback_data = "Upload") ], [InlineKeyboardButton("Subscribe", callback_data = "Cancel") ]]))
 
