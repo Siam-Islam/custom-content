@@ -25,7 +25,6 @@ class utilities:
 async def url(client, message):
     if not utilities.is_url(message.text):
         return
-    s = requests.Session()
     snt = await message.reply("Processing link.......")
     file_link = message.text
     name = await utilities.get_filename(file_link)
