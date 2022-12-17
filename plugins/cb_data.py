@@ -19,16 +19,14 @@ async def doc(bot,update):
      except Exception as e:
      	await ms.edit(e)
      	return
-     	
      splitpath = path.split("/downloads/")
-     dow_file_name = splitpath[1]
      await ms.edit("Trying To Upload")
-     		try:
-     			await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
-     			await ms.delete()
-     			os.remove(file_path)
-     		except Exception as e:
-     			await ms.edit(e)
-     			os.remove(file_path)
+     try:
+     	 await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
+     	 await ms.delete()
+     	 os.remove(file_path)				
+     except Exception as e:
+     	 await ms.edit(e)
+     	 os.remove(file_path)
      
      		
