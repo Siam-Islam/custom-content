@@ -11,8 +11,7 @@ class utilities:
        if not cd:
            return "None"
        fname = re.findall("filename=(.+)", cd)
-       t = fname[0]
-       name = t[1:][:-1]
+       name = fname[0]
        return name
 
     async def get_filesize(file_link):
@@ -32,6 +31,6 @@ async def url(client, message):
     if name == "None":
         await snt.edit_text("Unsupported link!")
     else:
-        await snt.edit_text(f"Title: {name}\nSize: {size}")
+        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}")
         
 
