@@ -33,6 +33,5 @@ async def url(client, message):
     if name == "None":
         await snt.edit_text("Unsupported link!")
     else:
-        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup=InlineKeyboardMarkup(
-	 [[ InlineKeyboardButton("Upload" , callback_data = "Upload") ], [InlineKeyboardButton("Subscribe", callback_data = "Cancel") ]]))
+        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup=InlineKeyboardMarkup([[ InlineKeyboardButton("Upload" , callback_data = "Upload") ], [InlineKeyboardButton("Subscribe", callback_data = "Cancel") ]]))
 
