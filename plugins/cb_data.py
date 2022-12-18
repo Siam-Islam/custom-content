@@ -12,19 +12,19 @@ async def doc(bot,update):
      name = new_name.split(":-")
      new_filename = name[1]
      file_path = f"downloads/{new_filename}"
-     ms = await update.message.edit("Trying To Download...")
+     ms = await update.message.edit_text("Trying To Download...")
      try:
-     	path = await bot.download_media(progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
+     	 await bot.download_media(progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
      except Exception as e:
-     	await ms.edit(e)
-     	return
-     await ms.edit("Trying To Upload")
+     	 await ms.edit_text(e)
+     	 return
+     await ms.edit_text("Trying To Upload")
      try:
      	 await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
      	 await ms.delete()
      	 os.remove(file_path)				
      except Exception as e:
-     	 await ms.edit(e)
+     	 await ms.edit_text(e)
      	 os.remove(file_path)
      
      		
