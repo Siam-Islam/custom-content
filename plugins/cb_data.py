@@ -21,8 +21,7 @@ async def doc(bot,update):
      try:
      	 await bot.send_document(update.message.chat.id,document = file_path,caption = "video.mp4" ,progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
      	 await ms.delete()
-     	 os.remove(file_path)
-         return				
+     	 os.remove(file_path)				
      except Exception as e:
      	 await ms.edit_text(e)
      	 os.remove(file_path)
