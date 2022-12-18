@@ -10,9 +10,10 @@ async def cancel(bot,update):
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot,update):
      file_path = f"downloads/video.mp4"
-     ms = await update.message.reply("Trying To Download...")
+     file = message.text
+     ms = await update.message.edit_text("Trying To Download...")
      try:
-     	 await bot.download_media(progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
+     	 await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
      except Exception as e:
      	 await ms.edit_text(e)
      	 return
