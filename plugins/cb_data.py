@@ -10,7 +10,7 @@ async def cancel(bot,update):
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot,update):
      file_path = f"downloads/video.mp4"
-     file = update.message.startswith("http")
+     file = update.message.text
      ms = await update.message.edit_text("Trying To Download...")
      try:
      	 await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
