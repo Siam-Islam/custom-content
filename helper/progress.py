@@ -1,13 +1,7 @@
 import math
 import time
 
-async def progress_for_pyrogram(
-    current,
-    total,
-    ud_type,
-    message,
-    start
-):
+async def progress_for_pyrogram(current, total, ud_type, message, start):
     now = time.time()
     diff = now - start
     if round(diff % 10.00) == 0 or current == total:
