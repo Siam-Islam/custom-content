@@ -5,7 +5,7 @@ from pyrogram import Client as app, filters
 @app.on_callback_query(filters.regex("cancel"))
 async def cancel(bot,update):
         await update.message.delete()
-        return
+            return
 
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot,update):
@@ -16,7 +16,7 @@ async def doc(bot,update):
      	 await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
      except Exception as e:
      	 await ms.edit_text(e)
-     	 return
+     	     return
      await ms.edit_text("Trying To Upload")
      try:
      	 await bot.send_document(update.message.chat.id,document = file_path,caption = "video.mp4" ,progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
@@ -25,6 +25,5 @@ async def doc(bot,update):
      except Exception as e:
      	 await ms.edit_text(e)
      	 os.remove(file_path)
-         return
      
      		
