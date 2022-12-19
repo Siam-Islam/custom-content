@@ -5,9 +5,6 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 s = requests.Session()
 
 class utilities:
-    def is_url(text):
-        return text.startswith("http")
-
     async def get_filename(file_link):
        r = s.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
@@ -24,7 +21,12 @@ class utilities:
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
-    if not utilities.is_url(message.text):
+    text = message.text
+    https = text.startswith("https://")
+    http = text.startswith("http://")
+    if not https:
+        return
+    else not http:
         return
     snt = await message.reply("Processing link.......")
     file_link = message.text
