@@ -26,7 +26,7 @@ async def url(client, message):
     http = text.startswith("http://")
     if not https:
         return
-    else not http:
+    elseif not http:
         return
     snt = await message.reply("Processing link.......")
     name = await utilities.get_filename(text)
