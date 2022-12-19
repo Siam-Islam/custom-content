@@ -6,8 +6,6 @@ class utilities:
     async def get_filename(file):
        r = s.get(text, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
-       if not cd:
-           return "None"
        fname = re.findall("filename=(.+)", cd)
        name = fname[0]
        return name
