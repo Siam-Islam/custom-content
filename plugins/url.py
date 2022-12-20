@@ -32,8 +32,8 @@ async def url(client, message):
     size = humanize.naturalsize(bytes, binary=True)
     await message.delete()
     if not name == "None":
-        await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Upload",callback_data = "doc"),InlineKeyboardButton("Cancel",callback_data = "cancel") ]]))
+        await snt.edit(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Upload",callback_data = "doc"),InlineKeyboardButton("Cancel",callback_data = "cancel") ]]))
     else:
-        await snt.edit_text("Unsupported link!")
+        await snt.edit("Unsupported link!")
   
         
