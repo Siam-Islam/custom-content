@@ -21,11 +21,11 @@ class utilities:
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
-    https_link = message.startswith("https://")
-    http_link = message.startswith("http://")
+    file_link = message.text
+    https_link = file_link.startswith("https://")
+    http_link = file_link.startswith("http://")
     if not https_link or http_link:
         return
-    file_link = message.text
     snt = await message.reply("Processing link.......")
     name = await utilities.get_filename(file_link)
     bytes = await utilities.get_filesize(file_link)
