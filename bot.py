@@ -12,7 +12,7 @@ api_hash = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 port = os.environ.get("PORT", "8000")
 loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
-app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = plugins)
+app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins")
 app.run()
 print("--BOT STARTED SUCESSFULLY--")
 
