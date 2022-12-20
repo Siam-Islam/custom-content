@@ -1,6 +1,6 @@
 import os, asyncio, logging
 from aiohttp import web
-from pyrogram import Client
+from pyrogram import Client, filters
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -13,6 +13,11 @@ port = os.environ.get("PORT", "8000")
 loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
 app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins")
+
+@app.on_message(filters.text & filters.private)
+async def echo(client, message):
+    await message.reply("Hello")
+
 app.run()
 print("--BOT STARTED SUCESSFULLY--")
 
