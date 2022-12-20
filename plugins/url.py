@@ -5,7 +5,7 @@ from pyrogram.types import InlineKeyboardButton, InlineKeyboardMarkup, ForceRepl
 s = requests.Session()
 
 class utilities:
-    async def get_filename(text):
+    async def get_filename(file_link):
        r = s.get(text, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
        if not cd:
@@ -14,21 +14,21 @@ class utilities:
        name = fname[0]
        return name
 
-    async def get_filesize(text):
+    async def get_filesize(file_link):
        r = s.get(text, allow_redirects=True, stream=True)
        filesize = r.headers.get("Content-Length", 0)
        return filesize
 
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
-    text = message.text
-    https = text.startswith("https://")
-    http = text.startswith("http://")
-    if not https or http:
+    https_link = message.startswith("https://")
+    http_link = message.startswith("http://")
+    if not https_link or http_link:
         return
+    file_link = message.text
     snt = await message.reply("Processing link.......")
-    name = await utilities.get_filename(text)
-    bytes = await utilities.get_filesize(text)
+    name = await utilities.get_filename(file_link)
+    bytes = await utilities.get_filesize(file_link)
     size = humanize.naturalsize(bytes, binary=True)
     await message.delete()
     if not name == "None":
