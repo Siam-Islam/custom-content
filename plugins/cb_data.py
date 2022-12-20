@@ -3,8 +3,8 @@ from helper.progress import progress_for_pyrogram
 from pyrogram import Client as app, filters
 
 class utilities:
-    async def get_filename(file):
-       r = s.get(text, allow_redirects=True, stream=True)
+    async def get_filename(file_link):
+       r = s.get(file_link, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
        fname = re.findall("filename=(.+)", cd)
        name = fname[0]
@@ -16,12 +16,12 @@ async def cancel(bot, update):
 
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot, message):
-     file = message.text
-     name = await utilities.get_filename(file)
+     file_link = message.text
+     name = await utilities.get_filename(file_link)
      file_path = f"downloads/{name[1:][:-1]}"
      ms = await update.message.edit("Trying To Download...")
      try:
-     	 await bot.download_media(message = file, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
+     	 await bot.download_media(message = file_link, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
      except Exception as e:
      	 await ms.edit(e)
      await ms.edit_text("Trying To Upload")
