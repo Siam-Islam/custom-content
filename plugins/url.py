@@ -22,7 +22,7 @@ class utilities:
 @app.on_message(filters.private & filters.text)
 async def url(client, message):
     file_url = message.text
-    if not url.startswith("https://") or url.startswith("http://"):
+    if not file_url.startswith("https://") or file_url.startswith("http://"):
         return
     snt = await message.reply("Processing link.......")
     name = await utilities.get_filename(file_url)
