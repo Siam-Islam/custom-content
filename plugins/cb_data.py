@@ -2,9 +2,11 @@ import os, asyncio, time, requests, re
 from helper.progress import progress_for_pyrogram
 from pyrogram import Client as app, filters
 
+s = requests.Session()
+
 class utilities:
-    async def get_filename(file_link):
-       r = s.get(file_link, allow_redirects=True, stream=True)
+    async def get_filename(url):
+       r = s.get(url, allow_redirects=True, stream=True)
        cd = r.headers.get("content-disposition")
        fname = re.findall("filename=(.+)", cd)
        name = fname[0]
@@ -16,8 +18,8 @@ async def cancel(bot, update):
 
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot, update):
-     file_link = update.message.text
-     name = await utilities.get_filename(file_link)
+     url = update.message.text
+     name = await utilities.get_filename(url)
      file_path = f"downloads/{name[1:][:-1]}"
      ms = await update.message.edit("Trying To Download...")
      try:
