@@ -18,6 +18,7 @@ async def cancel(bot, update):
 
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot, update):
+     await update.message.delete()
      url = update.message.text
      name = await utilities.get_filename(url)
      file_path = f"downloads/{name[1:][:-1]}"
@@ -28,7 +29,7 @@ async def doc(bot, update):
      	 await ms.edit(e)
      await ms.edit_text("Trying To Upload")
      try:
-     	 await bot.send_document(update.message.chat.id,document = file_path,caption = "name" ,progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
+     	 await bot.send_document(update.message.chat.id,document = file_path,caption = f"{name[1:][:-1]}" ,progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
      	 await ms.delete()
      	 os.remove(file_path)				
      except Exception as e:
