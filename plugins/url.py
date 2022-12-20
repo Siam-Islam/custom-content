@@ -28,7 +28,6 @@ async def url(client, message):
     name = await utilities.get_filename(url)
     bytes = await utilities.get_filesize(url)
     size = humanize.naturalsize(bytes, binary=True)
-    await message.delete()
     if not name == "None":
         await snt.edit_text(f"Title: {name[1:][:-1]}\nSize: {size}", reply_markup = InlineKeyboardMarkup([[ InlineKeyboardButton("Upload",callback_data = "doc"),InlineKeyboardButton("Cancel",callback_data = "cancel") ]]))
     else:
