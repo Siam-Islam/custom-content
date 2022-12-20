@@ -5,6 +5,7 @@ from pyrogram import Client, filters
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
 logging.getLogger("pyrogram").setLevel(logging.ERROR)
+logging.getLogger("aiohttp").setLevel(logging.ERROR)
 
 bot_token = os.environ.get("TOKEN", "1763065907:AAFk-ITNJWExRGAzCSGzKkchUTLqP7lHFxQ")
 api_id = os.environ.get("API_ID", "2766365")
@@ -14,7 +15,7 @@ loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
 app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins")
 
-@app.on_message(filters.text & filters.private)
+@app.on_message(filters.command(["start"]))
 async def echo(client, message):
     await message.reply("Hello")
 
