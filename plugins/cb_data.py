@@ -18,7 +18,6 @@ async def cancel(bot, update):
 
 @app.on_callback_query(filters.regex("doc"))
 async def doc(bot, update):
-     await update.message.delete()
      url = update.message.text
      name = await utilities.get_filename(url)
      file_path = f"downloads/{name[1:][:-1]}"
