@@ -27,7 +27,6 @@ def web_server():
 server = web.AppRunner(web_server())
 
 async def start_services():
-    await print("STARTING THE BOT.....")
     await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
@@ -36,8 +35,10 @@ async def start_services():
 
 if __name__ == "__main__":
     try:
+        print("STARTING THE BOT.....")
         loop.run_until_complete(start_services())
     except Exception as e:
         logging.error(e.with_traceback(None))
+    FINALLY:
         loop.stop()
         print("--BOT WAS UNABLE TO START--")
