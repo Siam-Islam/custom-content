@@ -13,14 +13,13 @@ api_hash = os.environ.get("API_HASH", "b867ccbeb57dd4f0c8e1d82e8bc363ef")
 port = os.environ.get("PORT", "8000")
 loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
-app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins")
+app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins"})
+app.run()
+print("--BOT STARTED SUCESSFULLY--")
 
 @app.on_message(filters.command(["start"]))
 async def echo(client, message):
     await message.reply("Hello")
-
-app.run()
-print("--BOT STARTED SUCESSFULLY--")
 
 @routes.get('/')
 async def hello(request):
@@ -40,9 +39,6 @@ async def start_services():
 if __name__ == "__main__":
     try:
         loop.run_until_complete(start_services())
-    except KeyboardInterrupt:
-        pass
-    except Exception as err:
-        logging.error(err.with_traceback(None))
-    finally:
+    except Exception as e:
+        logging.error(e.with_traceback(None))
         loop.stop()
