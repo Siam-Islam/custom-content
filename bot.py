@@ -27,10 +27,12 @@ def web_server():
 server = web.AppRunner(web_server())
 
 async def start_services():
+    await print("STARTING THE BOT.....")
     await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
-    await idle  
+    print("--BOT STARTED SUCCESSFULY--")
+    await idle()  
 
 if __name__ == "__main__":
     try:
