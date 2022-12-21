@@ -14,8 +14,6 @@ port = os.environ.get("PORT", "8000")
 loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
 app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins"})
-app.run()
-print("--BOT STARTED SUCESSFULLY--")
 
 @app.on_message(filters.command(["start"]))
 async def echo(client, message):
@@ -38,7 +36,10 @@ async def start_services():
 
 if __name__ == "__main__":
     try:
+        app.run()
         loop.run_until_complete(start_services())
+        print("--BOT STARTED SUCESSFULLY--")
     except Exception as e:
         logging.error(e.with_traceback(None))
         loop.stop()
+        print("--BOT WAS UNABLE TO START--")
