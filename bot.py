@@ -1,6 +1,6 @@
 import os, asyncio, logging
 from aiohttp import web
-from pyrogram import Client, filters
+from pyrogram import Client, filters, idle
 
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 logger = logging.getLogger(__name__)
@@ -15,10 +15,6 @@ loop = asyncio.get_event_loop()
 routes = web.RouteTableDef()
 app = Client("my_bot", bot_token = bot_token, api_hash = api_hash, api_id = api_id, plugins = {"root": "plugins"})
 
-@app.on_message(filters.command(["start"]))
-async def echo(client, message):
-    await message.reply("Hello")
-
 @routes.get('/')
 async def hello(request):
     return web.Response(text="Hello world")
@@ -31,14 +27,14 @@ def web_server():
 server = web.AppRunner(web_server())
 
 async def start_services():
+    await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
+    await idle  
 
 if __name__ == "__main__":
     try:
-        app.run()
         loop.run_until_complete(start_services())
-        print("--BOT STARTED SUCESSFULLY--")
     except Exception as e:
         logging.error(e.with_traceback(None))
         loop.stop()
