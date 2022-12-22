@@ -1,4 +1,4 @@
-from pyrogram import Client, filters
+from pyrogram import Client as app, filters
 
 @app.on_message(filters.command(["start"]))
 async def echo(client, message):
