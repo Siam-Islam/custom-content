@@ -30,13 +30,13 @@ async def start_services():
     await app.start()
     await server.setup()
     await web.TCPSite(server, "0.0.0.0", port).start()
+    await print("--BOT STARTED SUCCESSFULY--")
     await idle()  
 
 if __name__ == "__main__":
     try:
         print("STARTING THE BOT.....")
         loop.run_until_complete(start_services())
-        print("--BOT STARTED SUCCESSFULY--")
     except Exception as er:
         logging.error(er.with_traceback(None))
     finally:
