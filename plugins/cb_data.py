@@ -1,6 +1,7 @@
 import os, asyncio, time, requests, re
 from helper.progress import progress_for_pyrogram
 from pyrogram import Client as app, filters
+from pyrogram.types import ForceReply
 
 s = requests.Session()
 
@@ -15,24 +16,31 @@ class utilities:
 @app.on_callback_query(filters.regex("cancel"))
 async def cancel(bot, update):
         await update.message.delete()
-
+        
 @app.on_callback_query(filters.regex("doc"))
-async def doc(bot, update):
-     url = update.message.text
+async def doc(bot,update):
+     url = "https://bashdora.ml/c4952910"
      name = await utilities.get_filename(url)
-     file_path = f"downloads/{name[1:][:-1]}"
-     ms = await update.message.edit("Trying To Download...")
+     new_filename = name[0]
+     file_path = f"downloads/{new_filename[1:][:-1]}"
+     ms = await update.message.edit("``` Trying To Download...```")
+     c_time = time.time()
      try:
-     	 await bot.download_media(message = file_link, progress=progress_for_pyrogram,progress_args=("Trying To Download...",  ms, time.time()))
+     	 path = await bot.download_media(message = url, progress=progress_for_pyrogram,progress_args=( "``` Trying To Download...```",  ms, c_time   ))
      except Exception as e:
-     	 await ms.edit(e)
-     await ms.edit_text("Trying To Upload")
+         await ms.edit(e)
+     	 return
+     	 await ms.edit("```Trying To Upload```")
+     	 c_time = time.time()
      try:
-     	 await bot.send_document(update.message.chat.id,document = file_path,caption = f"{name[1:][:-1]}" ,progress=progress_for_pyrogram,progress_args=( "Trying To Uploading", ms, time.time()))
-     	 await ms.delete()
-     	 os.remove(file_path)				
+         await bot.send_document(update.message.chat.id,document = file_path,caption = f"**{new_filename}**",progress=progress_for_pyrogram,progress_args=( "```Trying To Uploading```",  ms, c_time   ))
+         await ms.delete()
+         os.remove(file_path)
      except Exception as e:
-     	 await ms.edit(e)
+         await ms.edit(e)
      	 os.remove(file_path)
+     			     		   		
+     		
+   
      
      		
